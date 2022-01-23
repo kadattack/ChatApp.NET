@@ -141,19 +141,24 @@ public class FullTableData
             new AppRole() {Name = "Moderator"}
         };
 
-        roles.ForEach(async role=> await roleManager.CreateAsync(role));
 
-        await userManager.Users.ForEachAsync(async user =>
+        for (var i = 0; i < roles.Count; i++)
         {
-            if (user.UserName != "admin")
-            {
-                await userManager.AddToRoleAsync(user, "Member");
-            }
-            else
-            {
-                await userManager.AddToRolesAsync(user, new []{"Admin","Moderator"});
-            }
-        });
+            await roleManager.CreateAsync(roles[i]);
+        }
+
+
+        // await userManager.Users.ForEachAsync(async user =>
+        // {
+        //     if (user.UserName != "admin")
+        //     {
+        //         await userManager.AddToRoleAsync(user, "Member");
+        //     }
+        //     else
+        //     {
+        //         await userManager.AddToRolesAsync(user, new []{"Admin","Moderator"});
+        //     }
+        // });
 
     }
 

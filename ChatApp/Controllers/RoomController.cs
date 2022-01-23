@@ -104,7 +104,8 @@ public class RoomController : BaseApiController
     }
 
 
-    [Authorize(Roles = "Admin")]
+    // [Authorize(Roles = "Admin")]
+    [Authorize]
     [HttpGet("delete/{id}")]
     public async Task<ActionResult<RoomDto>> DeleteRoom(int id)
     {
