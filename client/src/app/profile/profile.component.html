@@ -1,0 +1,55 @@
+
+<app-navbar></app-navbar>
+
+
+<main class="profile-page layout layout--3">
+  <div class="container">
+    <!-- Topics Start -->
+    <div class="topics">
+    <app-topicsfeed></app-topicsfeed>
+    </div>
+    <!-- Topics End -->
+
+    <!-- Room List Start -->
+    <div class="roomList">
+      <div class="profile">
+        <div class="profile__avatar">
+          <div class="avatar avatar--large active">
+            <img *ngIf="(profile)" (error)="$event.target.src='./assets/avatar.svg'"  src="{{imageUrl + profile.avatarUrl}}" />
+          </div>
+        </div>
+        <div class="profile__info">
+          <h3 *ngIf="(profile)">{{(profile).userName}}</h3>
+          <p *ngIf="profile">@{{(profile ).userName}}</p>
+          <a *ngIf="cabEdit" routerLink="/profile/settings" class="btn btn--main btn--pill">Edit Profile</a>
+        </div>
+        <div class="profile__about">
+          <h3>About</h3>
+          <p *ngIf="profile">
+            {{(profile ).bio}}
+          </p>
+        </div>
+      </div>
+
+      <div class="roomList__header">
+        <div>
+          <h2 *ngIf="profile">Study Rooms Hosted by {{profile.userName}}
+          </h2>
+        </div>
+      </div>
+
+      <app-roomsfeed *ngIf="profile" [profileRooms]="profile.roomDtos" ></app-roomsfeed>
+
+
+
+
+    </div>
+    <!-- Room List End -->
+
+    <!-- Activities Start -->
+    <div class="activities">
+     <app-activityfeed *ngIf="profile" [profileActivities]="profile.messagesDtos"></app-activityfeed>
+    </div>
+    <!-- Activities End -->
+  </div>
+</main>

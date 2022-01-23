@@ -1,0 +1,14 @@
+<!-- Topics Start -->
+  <div class="topics__header">
+    <h2>Browse Topics</h2>
+  </div>
+  <ul class="topics__list" >
+    <li>
+      <a [href]="" style="cursor: pointer" (click)="emitTopic('null')" class="active">All <span>{{alltopics}}</span></a>
+    </li>
+    <li *ngFor="let topic of topics">
+      <a [href]="" style="cursor: pointer" (click)="emitTopic(topic.topicName)">{{topic.topicName}} <span>{{topic.messagesNo}}</span></a>
+    </li>
+
+  </ul>
+
