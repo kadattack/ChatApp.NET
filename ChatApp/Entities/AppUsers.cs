@@ -19,7 +19,7 @@ public class AppUsers : IdentityUser<int>
     public ICollection<AppMessages> AppMessages { get; set; } = new List<AppMessages>();
 
     public ICollection<AppRooms> ParticipantOfRooms { get; set; } = new List<AppRooms>();
-    public string AvatarUrl { get; set; } = "./assets/avatar.svg";
+    public string AvatarUrl { get; set; } = "7848817827101636";
 
     public DateTime Created { get; set; } = DateTime.Now;
 

@@ -20,7 +20,7 @@ export class CreateroomComponent implements OnInit {
 
   createRoom(){
     this.http.put(this.baseUrl + "room", this.newRoom).subscribe(
-      res=> {console.log(res); this.router.navigateByUrl("")},  error => {console.log(error); this.textP.nativeElement.innerText = "Room in that Topic already exists."}
+      res=> {this.router.navigateByUrl("")},  error => {console.log(error); this.textP.nativeElement.innerText = "Room in that Topic already exists."}
     )
   }
 

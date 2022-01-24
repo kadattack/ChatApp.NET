@@ -18,7 +18,11 @@ public class SearchController : BaseApiController
     public async Task<ActionResult<IEnumerable<RoomsFeedDto>>> GetRoomsBySearch(string? searchroomname)
     {
 
-        List<Entities.AppRooms>? room = await _context.Rooms.Include(x => x.Participants).Include(x=> x.Topic).Where(x=> x.RoomName.ToLower().Contains(searchroomname.ToLower())).ToListAsync();
+        List<Entities.AppRooms>? room = await _context.Rooms.Include(x => x.Participants).Include(x=>x.Host).Include(x=> x.Topic).Where(x=> x.RoomName.ToLower().Contains(searchroomname.ToLower())).ToListAsync();
+        if (room.Count == 0)
+        {
+            room = await _context.Rooms.Include(x => x.Participants).Include(x=>x.Host).Include(x=> x.Topic).ToListAsync();
+        }
 
 
         var roomList = new List<RoomsFeedDto>();

@@ -27,7 +27,6 @@ export class RoomsfeedComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes['searchroom'])
     if (changes['searchroom']){
       this._searchroom = changes['searchroom'].currentValue
       this.getRoomsBySearch()
@@ -80,8 +79,6 @@ export class RoomsfeedComponent implements OnInit, OnChanges {
   }
 
   getRoomsByTopic(){
-    console.log(this.topicName)
-    console.log("run")
     this.http.get( this.baseUrl + "room/topic/" + this.topicName).subscribe(
       res=> this.rooms = res, error => console.log(error)
     )

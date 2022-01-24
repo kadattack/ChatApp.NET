@@ -24,9 +24,6 @@ export class AppComponent implements OnInit{
     this.setCurrentUser()
   }
 
-  public defImage(event){
-    console.log(event)
-  }
 
 
 }

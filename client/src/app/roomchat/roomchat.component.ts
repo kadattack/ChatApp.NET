@@ -31,19 +31,13 @@ export class RoomchatComponent implements OnInit, AfterViewChecked {
 
   ngOnInit(): void {
     this.getRoom()
-    console.log(this.baseUrl)
-    console.log(this.imageUrl)
-
-
   }
 
   async getRoom() {
     this.route.queryParams.subscribe(param=> {
-      console.log(param.topic)
       var createroomDto = {RoomName: this.route.snapshot.paramMap.get('roomname'), TopicName: param.topic, Description: ''}
       this.http.post<Room>( this.baseUrl + "room/", createroomDto).subscribe(
         ((response:Room) =>{
-          console.log(response)
           this.room = response
           return response
         })

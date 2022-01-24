@@ -21,7 +21,7 @@
       <!-- Not Logged In -->
   <div *ngIf="!(accountService.currentUser$ | async)">
       <a routerLink="login">
-        <img src="./assets/avatar.svg" />
+        <img src="./assets/avatar.svg" >
         <p>Login</p>
       </a>
   </div>
@@ -30,11 +30,11 @@
       <!-- Logged In -->
      <div *ngIf="accountService.currentUser$ | async">
       <div class="header__user">
-        <a routerLink="/profile/{{(accountService.currentUser$ | async).userName}}">
+        <a   >
           <div class="avatar avatar--medium active">
-            <img (error)="$event.target.src='./assets/avatar.svg'" src="{{(imageUrl + (accountService.currentUser$ | async).avatarUrl) }}"  />
+            <img (error)="$event.target.src='./assets/avatar.svg'" src="{{ (imageUrl + (accountService.currentUser$ | async).avatarUrl) }}" >
           </div>
-          <p>{{(accountService.currentUser$ | async).userName}} <span>@{{(accountService.currentUser$ | async).userName}}</span></p>
+          <p>{{(accountService.currentUser$ | async).userName}} <span style="cursor: pointer" (click)="reload($event)">@{{(accountService.currentUser$ | async).userName}}</span></p>
         </a>
         <button class="dropdown-button" (click)="showNavDropdown()">
           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">

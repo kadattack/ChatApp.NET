@@ -90,9 +90,11 @@ export class SettingsComponent implements OnInit, AfterViewChecked {
 
 
   updateProfile(){
+    console.log(this.profile)
     this.profileService.updateProfile(this.profile).subscribe(()=>{
       var user = JSON.parse(localStorage['user'])
-      user.avatarUrl = this.profile.avatarImageObject.url
+      if (this.profile.avatarImageObject) user.avatarUrl = this.profile.avatarImageObject.url
+      else user.avatarUrl = this.profile.avatarUrl
       this.accountService.setCurrentUser(user)
       localStorage.setItem('user', JSON.stringify(user));
       this.router.navigateByUrl("");

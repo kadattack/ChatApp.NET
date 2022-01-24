@@ -1,3 +1,4 @@
+using System.Net.Mime;
 using System.Security.Cryptography;
 using System.Text;
 using ChatApp.Entities;
@@ -140,12 +141,24 @@ public class FullTableData
             new AppRole() {Name = "Admin"},
             new AppRole() {Name = "Moderator"}
         };
-
-
         for (var i = 0; i < roles.Count; i++)
         {
             await roleManager.CreateAsync(roles[i]);
         }
+
+
+        byte[] imageArray = File.ReadAllBytes("./wwwroot/assets/avatar.svg");
+        string base64String = Convert.ToBase64String(imageArray);
+
+        var defautAvatar = new AppImageObject
+        {
+
+            Url = "7848817827101636",
+            ImageData = "data:image/svg+xml;base64," + base64String
+        };
+
+        context.ImageObjects.Add(defautAvatar);
+        await context.SaveChangesAsync();
 
 
         // await userManager.Users.ForEachAsync(async user =>

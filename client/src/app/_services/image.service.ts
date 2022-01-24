@@ -12,6 +12,6 @@ export class ImageService {
   constructor(private  http: HttpClient) { }
 
   getImage(imageurl:string){
-    return this.http.get(this.baseUrl + "image/" + imageurl)
+      return this.http.get(this.baseUrl + "image/" + imageurl)
   }
 }

@@ -34,7 +34,7 @@ export class ProfileComponent implements OnInit {
 
   getProfileOf(){
     this.profileService.getProfile(this.route.snapshot.paramMap.get('username')).subscribe(
-      (response:any) => {this.profile = response; console.log(this.profile); return response}
+      (response:any) => {this.profile = response; return response}
     )
   }
 

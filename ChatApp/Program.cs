@@ -121,7 +121,7 @@ try
     var userManager = services.GetRequiredService<UserManager<AppUsers>>();
     var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
     // await FullTableData.FillTables(userManager, roleManager, context);
-    // await FullTableData.FillRoles(userManager, roleManager, context);
+    await FullTableData.FillRoles(userManager, roleManager, context);
 }
 catch (Exception e)
 {

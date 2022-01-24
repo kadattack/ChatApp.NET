@@ -4,6 +4,8 @@ sudo docker container attach dev
 sudo docker container logs dev
 sudo docker exec dev env
 
+sudo docker container restart dev
+
 docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' dev
 
 
