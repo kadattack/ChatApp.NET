@@ -89,10 +89,8 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   }
 
   reload(event){
-    console.log(event.target.innerText)
     var username = event.target.innerText
     username = username.replace('@','').trim()
-    console.log(username)
     this.router.navigateByUrl("/", {skipLocationChange: true}).then(()=>
       this.router.navigateByUrl("/profile/" + username)
   );
