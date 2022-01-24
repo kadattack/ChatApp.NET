@@ -26,8 +26,8 @@ export class RegisterComponent implements OnInit {
       this.errorMsg = "Confirm Password does not match with Password."
     } else if ( !regExplarge.test(this.model.password) || !regExpnumb.test(this.model.password) ){
       this.errorMsg = "Password must contain at least one upper case letter and at least one number."
-    } else if (this.model.password.length < 4){
-      this.errorMsg = "Password must must be at least 4 characters long."
+    } else if (this.model.password.length < 6){
+      this.errorMsg = "Password must must be at least 6 characters long."
     } else {
       this.accountService.register(this.model).subscribe(res => {
         this.router.navigateByUrl("login");
