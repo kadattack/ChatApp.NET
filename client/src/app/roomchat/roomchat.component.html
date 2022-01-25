@@ -106,7 +106,7 @@
                   </a>
                   <span class="thread__date">{{msg.updated}}</span>
                 </div>
-                <div (click)="deleteMessage(msg)" class="thread__delete">
+                <div *ngIf="(accountService.currentUser$ | async).userName == msg.userCreated" (click)="deleteMessage(msg)" class="thread__delete">
                   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
                     <title>remove</title>
                     <path
