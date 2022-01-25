@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
+import {AccountService} from "../_services/account.service";
 
 @Component({
   selector: 'app-activityfeed',
@@ -9,10 +10,11 @@ import {environment} from "../../environments/environment";
 })
 export class ActivityfeedComponent implements OnInit {
   @Input() profileActivities : any
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, public accountService: AccountService) {}
   activities:any;
   baseUrl = environment.apiUrl
   imageUrl = environment.imageUrl
+
 
   ngOnInit(): void {
     if (this.profileActivities != null) {

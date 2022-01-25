@@ -114,8 +114,10 @@ public class RoomController : BaseApiController
         var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == userName);
         if (user == null) return Unauthorized("Incorrect Login!");
 
-        var room = await _context.Rooms.Include(x=>x.Topic).SingleOrDefaultAsync(x=>x.Id==id);
+        var room = await _context.Rooms.Include(x=>x.Topic).Include(x=>x.Host).SingleOrDefaultAsync(x=>x.Id==id);
         if (room == null) return Unauthorized("No such room exists!");
+        if (room.Host.UserName != userName) return Unauthorized("You are not the host of this room!");
+
 
         var topic = await _context.Topics.FindAsync(room.Topic.Id);
         if (topic.AppRooms.Count == 1)
@@ -162,8 +164,9 @@ public class RoomController : BaseApiController
         var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == userName);
         if (user == null) return Unauthorized("Incorrect Login!");
 
-        var room = await _context.Rooms.Include(x=>x.Topic).SingleOrDefaultAsync(x=>x.Id == editRoomDto.Id);
+        var room = await _context.Rooms.Include(x=>x.Topic).Include(x=>x.Host).SingleOrDefaultAsync(x=>x.Id == editRoomDto.Id);
         if (room == null) return Unauthorized("No such room exists!");
+        if (room.Host.UserName != userName) return Unauthorized("You are not the host of this room!");
 
         var topic = await _context.Topics.FirstOrDefaultAsync(x => x.TopicName == editRoomDto.TopicName);
         if (topic == null)
