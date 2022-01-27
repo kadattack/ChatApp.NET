@@ -3,7 +3,7 @@ A .NET Framework 6 with Angular and PostgreSQL implementation of a Django tutori
 https://www.youtube.com/watch?v=PtQiiknWUcI
 
 
-The only thing taken from the tutorial above is the HTML and CSS. The rest was made from scratch.
+The only thing taken from the Django tutorial above is the HTML and CSS. The rest was made from scratch.
 
 
 ## TODO
