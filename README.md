@@ -1,5 +1,5 @@
 # ChatApp.NET
-A .NET Framework 6 with Angular implementation of a Django tutorial StudyBud:
+A .NET Framework 6 with Angular and PostgreSQL implementation of a Django tutorial StudyBud:
 https://www.youtube.com/watch?v=PtQiiknWUcI
 
 
