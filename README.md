@@ -6,7 +6,7 @@ https://www.youtube.com/watch?v=PtQiiknWUcI
 The only thing taken from the Django tutorial above is the HTML and CSS. The rest was made from scratch.
 
 
-## TODO
+### TODO
 Add real time chat updates with SignalR. Currently chat works as a forum where users are required to maunally refresh the page to see new posts from other users.
 
 
