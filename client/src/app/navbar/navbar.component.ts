@@ -14,7 +14,7 @@ import {thBeLocale} from "ngx-bootstrap/chronos";
 import { DOCUMENT } from '@angular/common';
 import {Observable} from "rxjs";
 import {User} from "../_models/user";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router, RouterLinkActive} from "@angular/router";
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
@@ -35,13 +35,17 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   searchroom :string;
   @Output() roomSearchEmit = new EventEmitter<string>()
 
-  constructor(private http: HttpClient, public accountService: AccountService, private renderer: Renderer2, private router: Router) {
+  constructor(private http: HttpClient, public accountService: AccountService, private renderer: Renderer2, private router: Router, private route : ActivatedRoute) {
     accountService
   }
 
   logout(){
     this.accountService.logout();
-    this.router.navigateByUrl("");
+    if (this.router.url == "/"){
+      window.location.reload()
+    } else {
+      this.router.navigateByUrl("");
+    }
   }
 
 

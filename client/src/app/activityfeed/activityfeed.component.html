@@ -14,7 +14,7 @@
         <span>{{activity.created}}</span>
       </p>
     </a>
-    <div *ngIf="(accountService.currentUser$|async).userName == activity.userCreated" class="roomListRoom__actions">
+    <div *ngIf="(accountService.currentUser$|async) != null && (accountService.currentUser$|async).userName == activity.userCreated" class="roomListRoom__actions">
       <a style="cursor: pointer" (click)="deleteMessage(activity)" [href]="">
         <svg version="1.1" xmlns="http://www.w3.orgw/2000/svg" width="32" height="32" viewBox="0 0 32 32">
           <title>remove</title>

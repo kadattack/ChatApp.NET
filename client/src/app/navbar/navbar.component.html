@@ -20,7 +20,7 @@
 
       <!-- Not Logged In -->
   <div *ngIf="!(accountService.currentUser$ | async)">
-      <a routerLink="login">
+      <a routerLink="/login">
         <img src="./assets/avatar.svg" >
         <p>Login</p>
       </a>
