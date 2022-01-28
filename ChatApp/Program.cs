@@ -1,9 +1,11 @@
 using System.Text;
+using ChatApp.Controllers;
 using ChatApp.Data;
 using ChatApp.Data.Migrations;
 using ChatApp.Entities;
 using ChatApp.Interfaces;
 using ChatApp.Services;
+using ChatApp.SignalR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -37,6 +39,8 @@ builder.Services.AddIdentityCore<AppUsers>(opt =>
     }).AddRoles<AppRole>()
     .AddRoleManager<RoleManager<AppRole>>().AddSignInManager<SignInManager<AppUsers>>()
     .AddRoleValidator<RoleValidator<AppRole>>().AddEntityFrameworkStores<DataContext>();
+
+builder.Services.AddSignalR();
 
 builder.Services.AddDbContext<DataContext>(
     options =>
@@ -79,14 +83,31 @@ builder.Services.AddDbContext<DataContext>(
 
 
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>{
+
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"])),
         ValidateIssuer = false,
         ValidateAudience = false,
-    });
+    };
+    // We have to get the token from the query string since we can't get it from the header for SignalR
+    options.Events = new JwtBearerEvents
+    {
+        OnMessageReceived = context =>
+        {
+            var accessToken = context.Request.Query["access_token"];
+            var path = context.HttpContext.Request.Path;
+            if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/hubs"))
+            {
+                context.Token = accessToken;
+            }
+
+            return Task.CompletedTask;
+        }
+    };
+});
 
 // builder.Services.AddApplicationServices(_config);
 
@@ -136,7 +157,7 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
-app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
+app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:4200"));
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -150,7 +171,10 @@ app.UseStaticFiles();
 app.MapControllers(); // Maps urls with controllers
 
 // Fallback is the name of the FallbackController.cs
+app.MapHub<PresenceHub>("hubs/presence");
+
 app.MapFallbackToController("Index", "Fallback");
+app.MapHub<MessageHub>("hubs/message");
 
 // app.Run();
 await app.RunAsync();

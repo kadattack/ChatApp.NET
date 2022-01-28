@@ -52,7 +52,6 @@ public class RoomController : BaseApiController
     [HttpPost]
     public async Task<ActionResult<RoomDto>> GetRoomByString(CreateRoomDto createRoomDto)
     {
-        var room2 = await _context.Rooms.Include(x => x.Participants).Include(x => x.Host).ToListAsync();
 
         var room = await _context.Rooms.Include(x => x.Participants).Include(x => x.Host).Include(x=>x.AppMessages)
             .ThenInclude(x=>x.AppUsers).Include(x=>x.Topic).Where(x => x.RoomName == createRoomDto.RoomName).SingleOrDefaultAsync(x=>x.Topic.TopicName == createRoomDto.TopicName);
