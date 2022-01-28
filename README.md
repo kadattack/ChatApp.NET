@@ -3,7 +3,7 @@ A .NET Framework 6 with Angular and PostgreSQL implementation of a Django tutori
 https://www.youtube.com/watch?v=PtQiiknWUcI
 
 
-The only thing taken from the Django tutorial above is the HTML and CSS. The rest was made from scratch.
+The only thing taken from the Django tutorial above, is the HTML and CSS. The rest was made from scratch.
 
 
 The app includes live chat implemented with SignalR.
@@ -16,6 +16,6 @@ Account management is implemented with IdentityUser and roles are implemented wi
 
 
 ## Release
-This procjet's only intent is to act as a portoflio.
+This procjet is only used for portoflio.
 Implementation of this project can be found here: 
 https://chatappdotnet.herokuapp.com/
