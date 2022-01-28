@@ -6,8 +6,13 @@ https://www.youtube.com/watch?v=PtQiiknWUcI
 The only thing taken from the Django tutorial above is the HTML and CSS. The rest was made from scratch.
 
 
-### TODO
-Add real time chat updates with SignalR. Currently chat works as a forum where users are required to maunally refresh the page to see new posts from other users.
+The app includes live chat implemented with SignalR.
+Account management is implemented with IdentityUser and roles are implemented with IndentityRole.
+
+## TODO
+- [ ] Implement role management. Roles exist, however there are no checks yet for what each role can do.
+- [ ] Add string length checks. Currently there is no length limit input on all forms.
+- [ ] Add identication of online presence. People can currently see in the console log if someone comes online.
 
 
 ## Release
