@@ -67,7 +67,8 @@ export class RoomchatComponent implements OnInit, AfterViewChecked, OnDestroy {
       this.http.post<Room>( this.baseUrl + "room/", createroomDto).subscribe(
         ((response:Room) =>{
           this.accountService.currentUser$.pipe(take(1)).subscribe((user:User)=>{
-              this.createHubConnection(user, response)
+            this.message.userCreated = user.userName
+            this.createHubConnection(user, response)
             }
           )
           return response
@@ -78,19 +79,8 @@ export class RoomchatComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   async sendMessage(){
-    console.log()
-    this.accountService.currentUser$.subscribe(user=> {
-      this.message.userCreated = user.userName
       this.hubConnection.invoke("SendMessage", this.message).catch(error => console.log(error))
-
-      // this.http.put(this.baseUrl +"messages/", this.message).subscribe(res=> {
-      //   this.message.body = "";
-      //   this.getRoom();
-      //   if (this.conversationThread) this.conversationThread.scrollTo(0,document.querySelector(".threads").scrollHeight)
-      //
-      //   }
-      //   ,error => console.log(error))
-    })
+      this.message.body = "";
   }
 
   ngAfterViewChecked(): void {
