@@ -13,6 +13,7 @@ export interface Room {
   ],
   messages: [
     {
+      id: string,
       userCreated: string,
       messageIsInRoom: string,
       body: string,

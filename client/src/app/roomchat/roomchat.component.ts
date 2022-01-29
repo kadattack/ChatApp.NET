@@ -1,4 +1,13 @@
-import {AfterContentInit, AfterViewChecked, AfterViewInit, Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {
+  AfterContentInit,
+  AfterViewChecked,
+  AfterViewInit,
+  Component,
+  Inject,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Roomchat} from "../_models/roomchat";
 import {map, take} from "rxjs/operators";
@@ -20,8 +29,10 @@ import {HubConnection, HubConnectionBuilder} from "@microsoft/signalr";
 export class RoomchatComponent implements OnInit, AfterViewChecked, OnDestroy {
   // @Inject(chatRoomName:string)
   hubUrl = environment.hubUrl;
-  conversationThread:any;
+  // conversationThread:any
+  @ViewChild('scrollThread') conversationThread;
   room:Room ;
+  currentHeight = 0;
   topic:string;
   imageUrl = environment.imageUrl
   baseUrl = environment.apiUrl
@@ -34,6 +45,7 @@ export class RoomchatComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   ngOnInit(): void {
     this.getRoom()
+
   }
 
   createHubConnection(user: User, room: Room){
@@ -48,8 +60,9 @@ export class RoomchatComponent implements OnInit, AfterViewChecked, OnDestroy {
     })
 
     this.hubConnection.on("NewMessage", res=> {
-      this.room.messages.push(res)
-      if (this.conversationThread) this.conversationThread.scrollTo(0,document.querySelector(".threads").scrollHeight)
+      if (this.room.messages[this.room.messages.length-1].id != res.id){
+        this.room.messages.push(res)
+      }
     })
   }
 
@@ -79,13 +92,19 @@ export class RoomchatComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   async sendMessage(){
+    if (this.message.body != ""){
       this.hubConnection.invoke("SendMessage", this.message).catch(error => console.log(error))
       this.message.body = "";
+    }
   }
 
   ngAfterViewChecked(): void {
     this.conversationThread = document.querySelector(".threads");
-    if (this.conversationThread) this.conversationThread.scrollTo(0,document.querySelector(".threads").scrollHeight)
+    if (this.conversationThread && this.currentHeight != this.conversationThread.scrollHeight )
+    {
+      this.conversationThread.scrollTo(0,this.conversationThread.scrollHeight)
+      this.currentHeight = this.conversationThread.scrollHeight
+    }
   }
 
   deleteMessage(message){
@@ -109,6 +128,8 @@ export class RoomchatComponent implements OnInit, AfterViewChecked, OnDestroy {
   ngOnDestroy(): void {
     this.stopHubConnection()
   }
+
+
 
 
 
