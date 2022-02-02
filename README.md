@@ -9,8 +9,8 @@ Account management is implemented with IdentityUser and roles are implemented wi
 ## TODO
 - [ ] Implement role management. Roles [Admin, Moderator, Member] exist, however there are no privileges for each role yet. Currently everyone is considered as a Member.
 - [ ] Add string length checks. Currently there is no length limit input on all forms.
-- [ ] Add identication of online presence. People can currently see in the console log if someone comes online.
-- [ ] Fix timestamp stings so they turn from time to dates once 24h pass.
+- [ ] Add identication of online presence. People can currently only see in the console log if someone comes online.
+- [ ] Fix timestamp strings so they turn from time to dates once 24h pass.
 
 
 ## Release
