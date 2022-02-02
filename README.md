@@ -1,9 +1,8 @@
 # ChatApp.NET
-A .NET Framework 6 with Angular and PostgreSQL implementation of a Django tutorial StudyBud:
-https://www.youtube.com/watch?v=PtQiiknWUcI
+This is a web chat application created in .NET Framework 6 with Angular and PostgreSQL. The app is based on a Django tutorial StudyBud:
+https://www.youtube.com/watch?v=PtQiiknWUcI, where I took the HTML/CSS from the Django tutorial and rebuild it from scratch with the .NET Framework. 
 
 
-The only thing taken from the Django tutorial above, is the HTML and CSS. The rest was made from scratch.
 
 
 The app includes live chat implemented with SignalR.
@@ -17,6 +16,6 @@ Account management is implemented with IdentityUser and roles are implemented wi
 
 
 ## Release
-This procjet is only used for portoflio.
-Implementation of this project can be found here: 
+This project is only used as a portoflio.
+Implementation of this project can be found at: 
 https://chatappdotnet.herokuapp.com/
