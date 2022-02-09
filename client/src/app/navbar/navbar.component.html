@@ -16,11 +16,17 @@
         <input [(ngModel)]="searchroom" name="searchname" autocomplete="off" placeholder="Search for rooms..." />
       </label>
     </form>
+
+    <div *ngIf="!(accountService.currentUser$ | async)">
+      <p style="padding-top: 10px">Login to access chat rooms</p>
+    </div>
+
     <nav class="header__menu">
 
+
       <!-- Not Logged In -->
-  <div *ngIf="!(accountService.currentUser$ | async)">
-      <a routerLink="/login">
+      <div style="padding-top: 5px" *ngIf="!(accountService.currentUser$ | async)">
+        <a routerLink="/login">
         <img src="./assets/avatar.svg" >
         <p>Login</p>
       </a>
